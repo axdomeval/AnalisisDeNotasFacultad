@@ -2,8 +2,8 @@
 
 import csv
 import pandas as pd
-
-with open('input.txt', 'r') as file:
+input = "/home/valen/Notas Taller/AnalisisDeNotasFacultad/Extract/input.txt"
+with open(input, 'r') as file:
     a = 0
     lines = 0
     for line in file:
@@ -11,22 +11,30 @@ with open('input.txt', 'r') as file:
         # print(line)
         line = line.split()
         nota = line[-1]
+        if nota == "MazulloInsuficiente" or nota == "MazulloDesaprobado":
+            nota = nota.split('Mazullo')[-1]
 
-        if nota == "I":
+        if nota == "INSUFICIENTE":
             nota = "Insuficiente"
-        if nota == "D":
+        if nota == "DESAPROBADO":
             nota = "Desaprobado"
         if nota == "APROBADO":
             nota = "Aprobado"
-        nombre = line[0:-3]
+
+        if line[-3] == "Juan":
+            nombre = line[0:-5]
+        elif line[-2] == "Mazullo":
+            nombre = line[0:-6]
+        else:
+            nombre = line[0:-4]
 
         #Aprobados con nota entre parantesis
         
         if "(" in nota:
             nota = nota[1]
-            nombre = line[0:-3]
-        else:
             nombre = line[0:-2]
+        # else:
+        #     nombre = line[0:-1]
 
 
         # print(line[-2])
