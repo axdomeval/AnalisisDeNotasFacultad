@@ -1,1 +1,1 @@
-#L
+print("Hola Mundo")
